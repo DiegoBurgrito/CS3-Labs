@@ -25,7 +25,7 @@ public class BinarySearchTree
 	{
 	   if(tree == null)
 			tree = new TreeNode(val);
-		
+
 		Comparable treeValue = tree.getValue();
 		int dirTest = val.compareTo(treeValue);
 		
@@ -53,7 +53,9 @@ public class BinarySearchTree
 	}
 
 	// preOrder 
-	
+	public String preOrder() {
+		return null;
+}
 	// postOrder 
 	
 	// revOrder
