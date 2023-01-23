@@ -51,30 +51,59 @@ public class BinarySearchTree {
     public String preOrder() {
         return null;
     }
+
     // postOrder
+    public String postOrder() {
+        return null;
+    }
 
     // revOrder
+    public String revOrder() {
+        return null;
+    }
 
     // levelOrder - use a queue
+    public String levelOrder() {
+        return null;
+    }
 
     // zigzagOrder - hint below but could be solved in a different manner
     // loop thru a stack and load all nodes to a new stack(loading is based on direction)
     // set new stack to old and repeat
+    public String zigzagOrder() {
+        return null;
+    }
 
     // getNumLevels
+    public int getNumLevels() {
+        return 0;
+    }
 
     // getNumLeaves
+    public int getNumLeaves() {
+        return 0;
+    }
 
     // getWidth - insure this works right for the 2nd test case
+    public int getWidth() {
+        return 0;
+    }
 
     // getHeight
+    public int getHeight() {
+        return 0;
+    }
 
     // getNumNodes
+    public int getNumNodes() {
+        return 0;
+    }
 
     // isFull
-
+    public boolean isFull() {
+        return false;
+    }
     // contains
-
     // maxNode
 
     // minNode
