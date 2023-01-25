@@ -7,6 +7,8 @@
 import static java.lang.System.*;
 
 import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class BinarySearchTree {
     private TreeNode root;
@@ -33,10 +35,10 @@ public class BinarySearchTree {
 
         return tree;
     }
-
+    //inOrder
     public void inOrder() {
         inOrder(root);
-        System.out.println("\n");
+        System.out.print("\n");
     }
 
     private void inOrder(TreeNode tree) {
@@ -46,45 +48,67 @@ public class BinarySearchTree {
             inOrder(tree.getRight());
         }
     }
-
     // preOrder
     public void preOrder() {
         preOrder(root);
-        out.println("\n");
+        out.print("\n");
     }
 
     public void preOrder(TreeNode tree){
         if (tree != null) {
+            System.out.print(tree.getValue() + " ");
             preOrder(tree.getLeft());
             preOrder(tree.getRight());
-            System.out.print(tree.getValue() + " ");
         }
     }
-
     // postOrder
     public void postOrder() {
         postOrder(root);
-        out.println("\n");
+        out.print("\n");
     }
 
     private void postOrder(TreeNode tree){
         if (tree != null) {
-            inOrder(tree.getLeft());
+            postOrder(tree.getLeft());
+            postOrder(tree.getRight());
             System.out.print(tree.getValue() + " ");
-            inOrder(tree.getRight());
+        }
+    }
+    // revOrder
+    public void revOrder() {
+        revOrder(root);
+        out.print("\n");
+    }
+
+    private void revOrder(TreeNode tree) {
+        if (tree != null) {
+            revOrder(tree.getRight());
+            System.out.print(tree.getValue() + " ");
+            revOrder(tree.getLeft());
         }
     }
 
-    // revOrder
-    public String revOrder() {
-        return null;
-    }
-
     // levelOrder - use a queue
-    public String levelOrder() {
-        return null;
-    }
 
+    public void levelOrder() {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            out.print(node.getValue() + " ");
+
+            if (node.getLeft() != null){
+                queue.add(node.getLeft());
+            }
+
+
+            if (node.getRight() != null){
+                queue.add(node.getRight());
+            }
+
+        }
+        out.print("\n");
+    }
     // zigzagOrder - hint below but could be solved in a different manner
     // loop thru a stack and load all nodes to a new stack(loading is based on direction)
     // set new stack to old and repeat
@@ -148,7 +172,6 @@ public class BinarySearchTree {
         if (tree != null) {
             out += toString(tree.getLeft())+  tree.getValue() + " " + toString(tree.getRight());
         }
-
         return out;
     }
 }
