@@ -7,8 +7,8 @@
 import static java.lang.System.*;
 
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinarySearchTree {
     private TreeNode root;
@@ -112,8 +112,38 @@ public class BinarySearchTree {
     // zigzagOrder - hint below but could be solved in a different manner
     // loop thru a stack and load all nodes to a new stack(loading is based on direction)
     // set new stack to old and repeat
-    public String zigzagOrder() {
-        return null;
+    public void zigzagOrder() {
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<TreeNode> temp = new Stack<>();
+        stack.push(root);
+        boolean direction = true;
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            out.print(node.getValue() + " ");
+
+            if (direction) {
+                if (node.getLeft() != null) {
+                    temp.push(node.getLeft());
+                }
+                if (node.getRight() != null) {
+                    temp.push(node.getRight());
+                }
+            } else {
+                if (node.getRight() != null) {
+                    temp.push(node.getRight());
+                }
+                if (node.getLeft() != null) {
+                    temp.push(node.getLeft());
+                }
+            }
+            if (stack.isEmpty()) {
+                stack = temp;
+                temp = new Stack<>();
+                direction = !direction;
+            }
+        }
+        out.print("\n");
+
     }
 
     // getNumLevels

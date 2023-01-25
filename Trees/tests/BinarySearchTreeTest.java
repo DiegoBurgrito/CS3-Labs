@@ -65,4 +65,10 @@ class BinarySearchTreeTest {
         test.levelOrder();
         assertEquals("90 80 100 70 85 98 120 \n", outContent.toString());
     }
+
+    @Test
+    void zigzagOrder() {
+        test.zigzagOrder();
+        assertEquals("90 100 80 70 85 98 120 \n", outContent.toString());
+    }
 }
