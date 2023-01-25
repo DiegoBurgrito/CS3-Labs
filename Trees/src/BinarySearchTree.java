@@ -48,13 +48,31 @@ public class BinarySearchTree {
     }
 
     // preOrder
-    public String preOrder() {
-        return null;
+    public void preOrder() {
+        preOrder(root);
+        out.println("\n");
+    }
+
+    public void preOrder(TreeNode tree){
+        if (tree != null) {
+            preOrder(tree.getLeft());
+            preOrder(tree.getRight());
+            System.out.print(tree.getValue() + " ");
+        }
     }
 
     // postOrder
-    public String postOrder() {
-        return null;
+    public void postOrder() {
+        postOrder(root);
+        out.println("\n");
+    }
+
+    private void postOrder(TreeNode tree){
+        if (tree != null) {
+            inOrder(tree.getLeft());
+            System.out.print(tree.getValue() + " ");
+            inOrder(tree.getRight());
+        }
     }
 
     // revOrder
@@ -122,10 +140,15 @@ public class BinarySearchTree {
 
 
     public String toString() {
-        return "";
+        return toString(root);
     }
 
     private String toString(TreeNode tree) {
-        return "";
+        String out = "";
+        if (tree != null) {
+            out += toString(tree.getLeft())+  tree.getValue() + " " + toString(tree.getRight());
+        }
+
+        return out;
     }
 }
