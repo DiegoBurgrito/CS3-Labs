@@ -16,16 +16,13 @@ public class BinarySearchTree {
     }
 
     private TreeNode add(Comparable val, TreeNode tree) {
-        if (tree == null)
-            tree = new TreeNode(val);
+        if (tree == null) tree = new TreeNode(val);
 
         Comparable treeValue = tree.getValue();
         int dirTest = val.compareTo(treeValue);
 
-        if (dirTest < 0)
-            tree.setLeft(add(val, tree.getLeft()));
-        else if (dirTest > 0)
-            tree.setRight(add(val, tree.getRight()));
+        if (dirTest < 0) tree.setLeft(add(val, tree.getLeft()));
+        else if (dirTest > 0) tree.setRight(add(val, tree.getRight()));
 
         return tree;
     }
@@ -173,11 +170,12 @@ public class BinarySearchTree {
     }
 
     // getWidth - insure this works right for the 2nd test case
-    public int getWidth(){
+    public int getWidth() {
         return getWidth(root);
     }
-    private int getWidth(TreeNode tree){
-        if(tree == null){
+
+    private int getWidth(TreeNode tree) {
+        if (tree == null) {
             return 0;
         }
         int left = getWidth(tree.getLeft());
@@ -306,26 +304,21 @@ public class BinarySearchTree {
     }
 
     private TreeNode remove(Comparable val, TreeNode tree) {
-        if (tree == null)
-            tree = new TreeNode(val);
+        if (tree == null) tree = new TreeNode(val);
 
         Comparable treeValue = tree.getValue();
         int dirTest = val.compareTo(treeValue);
 
-        if (dirTest < 0)
-            tree.setLeft(remove(val, tree.getLeft()));
-        else if (dirTest > 0)
-            tree.setRight(remove(val, tree.getRight()));
+        if (dirTest < 0) tree.setLeft(remove(val, tree.getLeft()));
+        else if (dirTest > 0) tree.setRight(remove(val, tree.getRight()));
         else {
-            if(tree.getLeft()==null){
+            if (tree.getLeft() == null) {
                 return tree.getRight();
-            }
-            else if(tree.getRight()==null){
+            } else if (tree.getRight() == null) {
                 return tree.getLeft();
-            }
-            else{
+            } else {
                 tree.setValue(minNode(tree.getRight()));
-                tree.setRight(remove(tree.getValue(),tree.getRight()));
+                tree.setRight(remove(tree.getValue(), tree.getRight()));
             }
         }
         return tree;
