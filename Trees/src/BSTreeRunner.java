@@ -1,4 +1,3 @@
-/*
 //© A+ Computer Science  -  www.apluscompsci.com
 
 import static java.lang.System.*;
@@ -194,28 +193,28 @@ public class BSTreeRunner
         for (Integer item : new Integer[]{90, 100, 80, 70, 85, 98, 120}) {
             bst.add(item);
         }
-        bst.print();
+        
 
         bst.clear();
         System.out.println("Testing print function");
         for (Integer item : new Integer[]{50, 75, 90, 25, 12, 18, 10, 40, 30, 45, 65, 70, 60, 95, 80}) {
             bst.add(item);
         }
-        bst.print();
+        
 
         bst.clear();
         System.out.println("Testing print function");
         for (Integer item : new Integer[]{9, 1, 8, 2, 7, 6}) {
             bst.add(item);
         }
-        bst.print();
+        
 
         bst.clear();
         System.out.println("Testing print function");
         for (String item : new String[]{"Z", "h", "P", "R", "S", "Q", "G", "L", "C", "z", "r"}) {
             bst.add(item);
         }
-        bst.print();
+        
 
         bst.clear();
         System.out.println("Testing print function");
@@ -224,8 +223,7 @@ public class BSTreeRunner
             "t", "q", "f", "d", "j", "l", "i", "e", "c"}) {
             bst.add(item);
         }
-        bst.print();
+        
 
    }
 }
-*/

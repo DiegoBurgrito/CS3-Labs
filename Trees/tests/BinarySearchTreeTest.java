@@ -71,4 +71,53 @@ class BinarySearchTreeTest {
         test.zigzagOrder();
         assertEquals("90 100 80 70 85 98 120 \n", outContent.toString());
     }
+
+    @Test
+    void getNumLeaves() {
+        assertEquals(4, test.getNumLeaves());
+    }
+
+    @Test
+    void getNumNodes() {
+        assertEquals(7, test.getNumNodes());
+    }
+
+    @Test
+    void getHeight(){
+        assertEquals(2, test.getHeight());
+    }
+
+    @Test
+    void getWidth(){
+        assertEquals(5, test.getWidth());
+    }
+
+    @Test
+    void contains() {
+        assertTrue(test.contains(70));
+        assertTrue(test.contains(80));
+        assertTrue(test.contains(85));
+        assertTrue(test.contains(90));
+        assertTrue(test.contains(98));
+        assertTrue(test.contains(100));
+        assertTrue(test.contains(120));
+        assertFalse(test.contains(400));
+    }
+
+    @Test
+    void getSmallest() {
+        assertEquals(70, test.getSmallest());
+    }
+
+    @Test
+    void getLargest() {
+        assertEquals(120, test.getLargest());
+    }
+
+    @Test
+    void getNumLevels() {
+        assertEquals(3, test.getNumLevels());
+    }
+
+
 }
