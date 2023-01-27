@@ -11,8 +11,8 @@ public class DictionaryLL implements Dictionary
 	private LinkedList<String> dict;
     private int size;
 
-    public void DictionaryLL() {
-        dict = new LinkedList<>();
+    public DictionaryLL() {
+        dict = new LinkedList<String>();
     }
 
 
@@ -22,9 +22,8 @@ public class DictionaryLL implements Dictionary
      * @return true if the word was added to the dictionary
      * (it wasn't already there). */
     public boolean addWord(String word) {
-        word = word.toLowerCase();
-        if(!dict.contains(word)){
-            dict.add(word);
+        if(dict != null && !dict.contains(word.toLowerCase())){
+            dict.add(word.toLowerCase());
             return true;
         }
 
@@ -33,15 +32,12 @@ public class DictionaryLL implements Dictionary
 
 
     /** Return the number of words in the dictionary */
-    public int size()
-    {
+    public int size() {
 		return dict == null ? 0 : dict.size();
     }
 
     /** Is this a word according to this dictionary? */
     public boolean isWord(String s) {
-		return dict.contains(s.toLowerCase());
+		return dict != null && dict.contains(s.toLowerCase());
     }
-
-
 }
