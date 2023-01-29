@@ -23,7 +23,6 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      * That is, you should convert the string to all lower case as you insert it.
      */
     public boolean addWord(String s) {
-        //TODO: Implement this method.
         if(s != null && !s.equals("") && !isWord(s)) {
             String word = s.toLowerCase();
             TrieNode node = root;
@@ -49,7 +48,6 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      * as the number of TrieNodes in the trie.
      */
     public int size() {
-        //TODO: Implement this method
         return size;
     }
 
@@ -59,7 +57,6 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      */
     @Override
     public boolean isWord(String s) {
-        // TODO: Implement this method
         if (s != null && !s.equals("")) {
             int i = 0;
             String word = s.toLowerCase();
