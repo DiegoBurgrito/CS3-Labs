@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
 
-    private TrieNode root;
+    private final TrieNode root;
     private int size;
 
 
@@ -85,7 +85,6 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      */
     @Override
     public List<String> predictCompletions(String text, int n) {
-        // TODO: Implement this method
         // This method should implement the following algorithm:
         // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
         //    empty list
@@ -114,31 +113,36 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
                     }
                 } else {
                     for (Character c : node.getValidNextCharacters()) {
-
+                        queue.add(node.getChild(c));
                     }
                 }
             }
             return completions;
         }
 
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
-    private TrieNode findStem(String text) {
+    public TrieNode findStem(String text) {
         if(text.equals("")){
             return root;
         }
         int i = 0;
         String word = text.toLowerCase();
         TrieNode node = root;
+        //checks if first letter is in the trie
+        if(!node.getValidNextCharacters().contains(word.charAt(i))){
+            return null;
+        }
+        //checks if the rest of the letters are in the trie
         while (i < text.length()) {
             if (node.getValidNextCharacters().contains(word.charAt(i))) {
                 node = node.getChild(word.charAt(i));
+                i++;
             } else {
-                return node;
+                break;
             }
-            i++;
         }
-        return null;
+        return node;
     }
     // For debugging
     public void printTree() {
