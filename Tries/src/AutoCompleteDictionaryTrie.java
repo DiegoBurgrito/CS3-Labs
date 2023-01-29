@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * An trie data structure that implements the Dictionary and the AutoComplete ADT
@@ -23,15 +25,14 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      * That is, you should convert the string to all lower case as you insert it.
      */
     public boolean addWord(String s) {
-        if(s != null && !s.equals("") && !isWord(s)) {
+        if (s != null && !s.equals("") && !isWord(s)) {
             String word = s.toLowerCase();
             TrieNode node = root;
             int i = 0;
-            while(i < word.length()){
-                if(!node.getValidNextCharacters().contains(word.charAt(i))){
+            while (i < word.length()) {
+                if (!node.getValidNextCharacters().contains(word.charAt(i))) {
                     node = node.insert(word.charAt(i));
-                }
-                else if(node.getValidNextCharacters().contains(word.charAt(i))){
+                } else if (node.getValidNextCharacters().contains(word.charAt(i))) {
                     node = node.getChild(word.charAt(i));
                 }
                 i++;
@@ -99,22 +100,19 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
         //       Add all of its child nodes to the back of the queue
         // Return the list of completions
 
-        if(findStem(text) != null){
+        if (findStem(text) != null) {
             TrieNode stem = findStem(text);
             LinkedList<TrieNode> queue = new LinkedList<>();
             List<String> completions = new ArrayList<>();
             queue.add(stem);
-            while(!queue.isEmpty() && completions.size() < n){
+            while (!queue.isEmpty() && completions.size() < n) {
                 TrieNode node = queue.poll();
-                if(node.endsWord()){
+                if (node.endsWord()) {
                     completions.add(node.getText());
-                    for (Character c : node.getValidNextCharacters()) {
-                        queue.add(node.getChild(c));
-                    }
-                } else {
-                    for (Character c : node.getValidNextCharacters()) {
-                        queue.add(node.getChild(c));
-                    }
+
+                }
+                for (Character c : node.getValidNextCharacters()) {
+                    queue.add(node.getChild(c));
                 }
             }
             return completions;
@@ -122,17 +120,21 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
 
         return new ArrayList<>();
     }
+
     public TrieNode findStem(String text) {
-        if(text.equals("")){
+        if (text.equals("")) {
             return root;
         }
-        int i = 0;
+
         String word = text.toLowerCase();
-        TrieNode node = root;
         //checks if first letter is in the trie
-        if(!node.getValidNextCharacters().contains(word.charAt(i))){
+        if (!root.getValidNextCharacters().contains(word.charAt(0))) {
             return null;
         }
+
+        TrieNode node = root;
+        int i = 0;
+
         //checks if the rest of the letters are in the trie
         while (i < text.length()) {
             if (node.getValidNextCharacters().contains(word.charAt(i))) {
@@ -144,6 +146,7 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
         }
         return node;
     }
+
     // For debugging
     public void printTree() {
         printNode(root);
@@ -153,8 +156,7 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      * Do a pre-order traversal from this node down
      */
     public void printNode(TrieNode curr) {
-        if (curr == null)
-            return;
+        if (curr == null) return;
 
         System.out.println(curr.getText());
 
@@ -164,7 +166,6 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
             printNode(next);
         }
     }
-
 
 
 }
