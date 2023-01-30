@@ -121,7 +121,7 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
         return new ArrayList<>();
     }
 
-    public TrieNode findStem(String text) {
+    private TrieNode findStem(String text) {
         if (text.equals("")) {
             return root;
         }
