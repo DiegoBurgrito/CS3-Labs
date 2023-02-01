@@ -27,7 +27,7 @@ public class PointSET {
     }
 
     public boolean contains(Point2D p) {           // does the set contain point p? 
-        return false;
+        return set.contains(p);
     }
 
     public void draw() {                    // draw all points to standard draw with p.draw()
@@ -39,18 +39,25 @@ public class PointSET {
     }
 
     public Iterable<Point2D> range(RectHV rect) {           // all points that are inside the rectangle
-        Iterable<Point2D> iterable = (Iterable<Point2D>) set.iterator();
-        while(iterable.) {
-            if(!rect.contains(iterable.next())) {
-                iterable.remove();;
+        Set<Point2D> range = new HashSet<>();
+        for (Point2D point : set) {
+            if(rect.contains(point)){
+                range.add(point);
             }
         }
-        return iterable;
+        return range;
     }
 
-    public Point2D nearest(Point2D p) {           // a nearest neighbor in the set to point p; null if the set is empty 
-
-        return null;
+    public Point2D nearest(Point2D p) {           // a nearest neighbor in the set to point p; null if the set is empty
+        double min = Double.MAX_VALUE;
+        Point2D nearest = null;
+        for (Point2D point : set) {
+            if((point.y() - p.y()) / (point.x() - p.x()) < min) {
+                min = (point.y() - p.y()) / (point.x() - p.x());
+                nearest = point;
+            }
+        }
+        return nearest;
     }
 
     private void checkIfNull(Object o) {
