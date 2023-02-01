@@ -4,16 +4,22 @@ import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdDraw;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class KdTree {
+    private Set<Point2D> set;
 
+    public KdTree() {
+        set = new HashSet<>();
+    }
     /**
      * returns if the size is equal to zero
      *
      * @return
      */
     public boolean isEmpty() {                      // is the set empty? 
-        return false;
+        return set.isEmpty();
     }
 
     /**
@@ -22,7 +28,7 @@ public class KdTree {
      * @return
      */
     public int size() {                      // number of points in the set 
-        return 0;
+        return set.size();
     }
 
     /**
