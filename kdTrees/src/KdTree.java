@@ -137,8 +137,7 @@ public class KdTree {
      * @return
      */
     public Point2D nearest(Point2D p) {
-
-        return null;
+        return isEmpty() ? null : nearest(p, root, false);
     }
 
     /**
@@ -148,8 +147,17 @@ public class KdTree {
      * @param node
      * @param vertical
      */
-    private void nearest(Point2D p, Node node, boolean vertical) {
-
+    private Point2D nearest(Point2D p, Node node, boolean vertical) {
+        if(vertical) {
+            if (p.y() < node.p.y()) {
+                return node.left == null ? node.p : nearest(p, node.left, false);
+            }
+            return node.right == null ? node.p : nearest(p, node.right, false);
+        }
+        if (p.x() < node.p.x()) {
+            return node.left == null ? node.p : nearest(p, node.left, true);
+        }
+        return node.right == null ? node.p : nearest(p, node.right, true);
     }
 
     /**

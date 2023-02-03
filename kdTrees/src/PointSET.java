@@ -52,7 +52,7 @@ public class PointSET {
         double min = Double.MAX_VALUE;
         Point2D nearest = null;
         for (Point2D point : set) {
-            if((point.y() - p.y()) / (point.x() - p.x()) < min) {
+            if(nearest == null || p.distanceTo(point) <= min) {
                 min = (point.y() - p.y()) / (point.x() - p.x());
                 nearest = point;
             }
@@ -67,7 +67,7 @@ public class PointSET {
     }
 
     public static void main(String[] args) {                // unit testing of the methods (optional) 
-        String filename = "circle10.txt";   // args[0];
+        String filename = "circle100.txt";   // args[0];
         In in = new In(filename);
 
         StdDraw.enableDoubleBuffering();
