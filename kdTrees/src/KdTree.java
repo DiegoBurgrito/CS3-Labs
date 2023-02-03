@@ -5,30 +5,25 @@ import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdDraw;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 public class KdTree {
-    private Set<Point2D> set;
+    private Node root;
 
     public KdTree() {
-        set = new HashSet<>();
-    }
-    /**
-     * returns if the size is equal to zero
-     *
-     * @return
-     */
-    public boolean isEmpty() {                      // is the set empty? 
-        return set.isEmpty();
+        root = null;
     }
 
-    /**
-     * returns the current size of the tree
-     *
-     * @return
-     */
-    public int size() {                      // number of points in the set 
-        return set.size();
+    public boolean isEmpty() {                      // is the set empty? 
+        return root == null;
+    }
+
+    public int size() {                      // number of points in the set
+        return size(root);
+    }
+
+    private int size(Node node) {
+        if(node == null) return 0;
+        return 1 + size(node.left) + size(node.left);
     }
 
     /**
@@ -38,7 +33,12 @@ public class KdTree {
      * @param p
      */
     public void insert(Point2D p) {
-
+        if(root == null) {
+            root = new Node(p);
+        }
+        if(!contains(p)) {
+            root = insert(p, root, false);
+        }
     }
 
     /**
@@ -51,8 +51,11 @@ public class KdTree {
      * @return
      */
     private Node insert(Point2D p, Node node, boolean vertical) {
-
-        return null;
+        if (node == null) {
+            return new Node(p);
+        }
+        if (vertical) return p.y() < node.p.y() ? insert(p, node.left, false) : insert(p, node.right, false);
+        return p.x() < node.p.x() ? insert(p, node.left, true) : insert(p, node.right, true);
     }
 
     /**
@@ -61,8 +64,8 @@ public class KdTree {
      * @param p
      * @return
      */
-    public boolean contains(Point2D p) {           // does the set contain point p? 
-        return false;
+    public boolean contains(Point2D p) {           // does the set contain point p?
+        return contains(p.x(), p.y(), root,false);
     }
 
     /**
@@ -76,8 +79,12 @@ public class KdTree {
      * @return
      */
     private boolean contains(double x, double y, Node node, boolean vertical) {
-
-        return false;
+        if(node == null) return false;
+        if(node.p.x() == x && node.p.y() == y) return true;
+        if(vertical) {
+            return y < node.p.y() ? contains(x, y, node.left, false) : contains(x, y, node.right, false);
+        }
+        return x < node.p.x() ? contains(x, y, node.left, true) : contains(x, y, node.right, true);
     }
 
     /**
