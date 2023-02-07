@@ -7,13 +7,15 @@ import java.util.ArrayList;
 
 public class KdTree {
     private Node root;
+    private int size;
 
     public KdTree() {
+        size = 0;
         root = null;
     }
 
     public static void main(String[] args) {
-        String filename = "circle10.txt";
+        String filename = "input10.txt";
         In in = new In(filename);
 
         StdDraw.enableDoubleBuffering();
@@ -28,6 +30,7 @@ public class KdTree {
         }
         kdtree.draw();
         StdDraw.show();
+        System.out.println(kdtree.nearest(new Point2D(.34, .766)));
     }
 
     public boolean isEmpty() {
@@ -35,43 +38,38 @@ public class KdTree {
     }
 
     public int size() {
-        return size(root);
+        return size;
     }
 
-    private int size(Node node) {
-        return node == null ? 0 : 1 + size(node.left) + size(node.right);
-    }
 
     public void insert(Point2D p) {
         checkIfNull(p);
         if (root == null) {
+            size++;
             root = new Node(p);
             root.rect = new RectHV(0, 0, 1, 1);
         }
-        if (!contains(p)) {
-            insert(p, root, true);
+        else if (!contains(p)) {
+            size++;
+            insert(p, root, true, 0, 0, 1, 1);
         }
     }
 
-    private Node insert(Point2D p, Node node, boolean vertical) {
+    private Node insert(Point2D p, Node node, boolean vertical, double xMin, double yMin, double xMax, double yMax) {
         if (node == null) {
-            return new Node(p);
+            return new Node(p, new RectHV(xMin, yMin, xMax, yMax));
         }
         if (vertical) {
             if (p.x() < node.p.x()) {
-                node.left = insert(p, node.left, false);
-                node.left.rect = new RectHV(node.rect.xmin(), node.rect.ymin(), node.p.x(), node.rect.ymax());
+                node.left = insert(p, node.left, false, node.rect.xmin(), node.rect.ymin(), node.p.x(), node.rect.ymax());
             } else {
-                node.right = insert(p, node.right, false);
-                node.right.rect = new RectHV(node.p.x(), node.rect.ymin(), node.rect.xmax(), node.rect.ymax());
+                node.right = insert(p, node.right, false, node.p.x(), node.rect.ymin(), node.rect.xmax(), node.rect.ymax());
             }
         } else {
             if (p.y() < node.p.y()) {
-                node.left = insert(p, node.left, true);
-                node.left.rect = new RectHV(node.rect.xmin(), node.rect.ymin(), node.rect.xmax(), node.p.y());
+                node.left = insert(p, node.left, true, node.rect.xmin(), node.rect.ymin(), node.rect.xmax(), node.p.y());
             } else {
-                node.right = insert(p, node.right, true);
-                node.right.rect = new RectHV(node.rect.xmin(), node.p.y(), node.rect.xmax(), node.rect.ymax());
+                node.right = insert(p, node.right, true, node.rect.xmin(), node.p.y(), node.rect.xmax(), node.rect.ymax());
             }
         }
         return node;
@@ -153,12 +151,12 @@ public class KdTree {
                 closest = searchTrees(p, closest, node.left, node.right, false);
             } else {
                 // recurse right tree first then left tree
-                closest = searchTrees(p, closest, node.right, node.left, true);
+                closest = searchTrees(p, closest, node.right, node.left, false);
             }
         } else {
             if (p.y() < node.p.y()) {
                 // recurse left tree first then right tree
-                closest = searchTrees(p, closest, node.left, node.right, false);
+                closest = searchTrees(p, closest, node.left, node.right, true);
             } else {
                 // recurse right tree first then left tree
                 closest = searchTrees(p, closest, node.right, node.left, true);
@@ -195,8 +193,14 @@ public class KdTree {
         Point2D p;
         RectHV rect;
 
+
         public Node(Point2D p) {
             this.p = p;
+        }
+
+        public Node(Point2D p, RectHV rect) {
+            this.p = p;
+            this.rect = rect;
         }
     }
 }
