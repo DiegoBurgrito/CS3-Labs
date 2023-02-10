@@ -6,7 +6,7 @@ import static java.lang.System.out;
 
 public class Heap {
 
-    private int[] data;
+    public int[] data;
     private int size;
     private int remove;
 
@@ -21,13 +21,13 @@ public class Heap {
 
     public void add(int value) {
         // 1) add (resize if full)
-        if(size == data .length) {
+        if(size == data.length) {
            doubleData();
-        } else {   // 2) swap up
+        }    // 2) swap up
             data[size] = value;
             swapUp(size);
             size++;
-        }
+
 
     }
 
@@ -38,7 +38,7 @@ public class Heap {
                 swap(parent, bot);
                 bot = parent;
             } else {
-                return;
+                break;
             }
         }
     }
@@ -50,14 +50,14 @@ public class Heap {
     }
 
     private void swapDown(int start, int stop) {
+        int max;
         while (start < stop) {
-            int max = data[start];
             int left = start * 2 + 1;
             int right = start * 2 + 2;
 
-            if(left < data.length) {
-                if (right < data.length) {
-                    if(data[left]> data[right]) {
+            if(left <= size) {
+                if (right <= size) {
+                    if(data[left] > data[right]) {
                         max = left;
                     } else {
                         max = right;
@@ -66,14 +66,14 @@ public class Heap {
                     max = left;
                 }
             } else {
-                break;
+                return;
             }
 
             if (data[max] > data[start]) {
                 swap(start, max);
                 start = max;
             } else {
-                break;
+                return;
             }
 
         }
@@ -101,7 +101,11 @@ public class Heap {
 
     @Override
     public String toString() {
-        return "";
+        String out = "[";
+        for (int i = 0; i < size; i ++) {
+            out += (data[i] + ", ");
+        }
+        return out.substring(0, out.length() - 2) + "]";
     }
 
     public static void main(String... a) {
