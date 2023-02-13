@@ -17,6 +17,7 @@ public class BuildHeap {
 
     private void readData() throws IOException {
         int n = in.nextInt();
+        System.out.println("this is n : " + n);
         data = new int[n];
         for (int i = 0; i < n; ++i) {
           data[i] = in.nextInt();
@@ -30,8 +31,13 @@ public class BuildHeap {
         }
     }
 
+    private void swap(int loc1, int loc2) {
+        int temp = data[loc1];
+        data[loc1] = data[loc2];
+        data[loc2] = temp;
+    }
     private void generateSwaps() {
-      swaps = new ArrayList<Swap>();
+      swaps = new ArrayList<>();
       // The following naive implementation just sorts 
       // the given sequence using selection sort algorithm
       // and saves the resulting sequence of swaps.
@@ -39,7 +45,19 @@ public class BuildHeap {
       // but in the worst case gives a quadratic number of swaps.
       //
       // TODO: replace by a more efficient implementation
-      for (int i = 0; i < data.length; ++i) {
+    int bot = data.length - 1;
+    while (bot > 0) {
+        int parent = (bot - 1) / 2;
+        if (data[parent] > data[bot]) {
+            swap(parent, bot);
+            swaps.add(new Swap(parent, bot));
+            bot = parent;
+        } else {
+            break;
+        }
+    }
+
+/*      for (int i = 0; i < data.length; ++i) {
         for (int j = i + 1; j < data.length; ++j) {
           if (data[i] > data[j]) {
             swaps.add(new Swap(i, j));
@@ -48,7 +66,8 @@ public class BuildHeap {
             data[j] = tmp;
           }
         }
-      }
+      }*/
+        System.out.println("num of swaps : " + swaps.size());
     }
 
     public void solve() throws IOException {
