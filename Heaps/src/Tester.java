@@ -5,21 +5,21 @@ import java.util.Scanner;
 
 public class Tester {
     public static void main(String[] args) throws FileNotFoundException {
-        int size = 1;
+        int index = 1;
 
         String[] data = new String[10];
         Scanner sc = new Scanner(new File("HeapData.in"));
 
         while(sc.hasNextLine()) {
-            if(data.length == size) {
+            if(data.length == index) {
                 data = Arrays.copyOf(data, data.length * 2);
             }
-            data[size] = sc.nextLine();
-            size++;
+            data[index] = sc.nextLine();
+            index++;
         }
 
         int line = 1;
-        for (int i = 1; i < size; i++) {
+        for (int i = 1; i < index; i++) {
             if(i > Math.pow(2, line) - 1) {
                 System.out.println();
                 line++;
@@ -28,7 +28,8 @@ public class Tester {
         }
 
         System.out.println();
-        HeapPrinter.printHeap(data, size);
+        System.out.println();
+        HeapPrinter.printHeap(data, index);
     }
 
     static class HeapPrinter {
