@@ -1,13 +1,9 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class BuildHeap {
     private int[] data;
     private List<Swap> swaps;
-
     private FastScanner in;
     private PrintWriter out;
 
@@ -17,17 +13,16 @@ public class BuildHeap {
 
     private void readData() throws IOException {
         int n = in.nextInt();
-        System.out.println("this is n : " + n);
         data = new int[n];
         for (int i = 0; i < n; ++i) {
-          data[i] = in.nextInt();
+            data[i] = in.nextInt();
         }
     }
 
     private void writeResponse() {
         out.println(swaps.size());
         for (Swap swap : swaps) {
-          out.println(swap.index1 + " " + swap.index2);
+            out.println(swap.index1 + " " + swap.index2);
         }
     }
 
@@ -36,38 +31,39 @@ public class BuildHeap {
         data[loc1] = data[loc2];
         data[loc2] = temp;
     }
+
     private void generateSwaps() {
-      swaps = new ArrayList<>();
-      // The following naive implementation just sorts 
-      // the given sequence using selection sort algorithm
-      // and saves the resulting sequence of swaps.
-      // This turns the given array into a heap, 
-      // but in the worst case gives a quadratic number of swaps.
-      //
-      // TODO: replace by a more efficient implementation
-    int bot = data.length - 1;
-    while (bot > 0) {
-        int parent = (bot - 1) / 2;
-        if (data[parent] > data[bot]) {
-            swap(parent, bot);
-            swaps.add(new Swap(parent, bot));
-            bot = parent;
-        } else {
-            break;
+        swaps = new ArrayList<>();
+        for (int i = data.length - 1; i >= 0 ; i--) {
+            heapify(data, i);
         }
     }
 
-/*      for (int i = 0; i < data.length; ++i) {
-        for (int j = i + 1; j < data.length; ++j) {
-          if (data[i] > data[j]) {
-            swaps.add(new Swap(i, j));
-            int tmp = data[i];
-            data[i] = data[j];
-            data[j] = tmp;
-          }
+    private void heapify(int[] arr, int i) {
+        int smallest = i; // Initialize smallest as root
+        int left = 2 * i + 1; // left = 2*i + 1
+        int right = 2 * i + 2; // right = 2*i + 2
+
+        // If left child is smaller than root
+        if (left < data.length && arr[left] < arr[smallest])
+            smallest = left;
+
+        // If right child is larger than smaller so far
+        if (right < data.length && arr[right] < arr[smallest])
+            smallest = right;
+
+        // If smallest is not root
+        if (smallest != i) {
+            swaps.add(new Swap(i, smallest));
+            swap(i, smallest);
+            heapify(arr, smallest);
         }
-      }*/
-        System.out.println("num of swaps : " + swaps.size());
+    }
+
+    /* A utility function to print array of size n */
+    static void printArray(int arr[]) {
+        for (int j : arr) System.out.print(j + " ");
+        System.out.println();
     }
 
     public void solve() throws IOException {
@@ -78,6 +74,7 @@ public class BuildHeap {
         writeResponse();
         out.close();
     }
+
 
     static class Swap {
         int index1;
@@ -110,3 +107,8 @@ public class BuildHeap {
         }
     }
 }
+
+
+
+
+
