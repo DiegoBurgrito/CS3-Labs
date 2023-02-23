@@ -1,18 +1,24 @@
-//© A+ Computer Science  -  www.apluscompsci.com
-//Name -
-//Date -
-//Class -
-//Lab  -
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-import static java.lang.System.*;
 
 public class MazeRunner
 {
 	public static void main( String args[] ) throws IOException
 	{
-		//add test cases
+		Scanner file = new Scanner(new File("maze.dat"));
+		while (file.hasNextLine()) {
+
+			int size = file.nextInt();
+			int[][] maze = new int[size][size];
+			for (int r = 0; r < size; r++) {
+				for (int c = 0; c < size; c++) {
+					maze[r][c] = file.nextInt();
+				}
+			}
+			Maze m = new Maze(maze);
+			System.out.println(m + "\n");
+			file.nextLine();
+		}
 	}
 }
