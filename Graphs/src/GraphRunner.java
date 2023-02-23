@@ -1,8 +1,3 @@
-//© A+ Computer Science  -  www.apluscompsci.com
-//Name -
-//Date -
-//Class -
-//Lab  -
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +9,6 @@ public class GraphRunner {
         int howManyTimes = file.nextInt();
         file.nextLine();
         for (int x = 0; x < howManyTimes; x++) {
-            //add code here
 			Graph g = new Graph(file.nextLine());
 			String s = file.nextLine();
 			g.check(s.charAt(0) + "", s.charAt(1) + "", "");
