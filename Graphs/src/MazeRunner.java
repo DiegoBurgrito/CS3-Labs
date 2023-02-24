@@ -6,7 +6,6 @@ public class MazeRunner {
     public static void main(String args[]) throws IOException {
         Scanner file = new Scanner(new File("maze.dat"));
         while (file.hasNextLine()) {
-
             int size = file.nextInt();
             int[][] maze = new int[size][size];
             for (int r = 0; r < size; r++) {
