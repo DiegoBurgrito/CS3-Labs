@@ -28,7 +28,6 @@ public class ShortestPathMaze {
         if(isValid(r, c)) {
             maze[r][c] = 9;
             if(c == maze[0].length - 1) {
-                maze[r][c] = 9;
                 if(shortest == 0 || path < shortest) {
                     shortest = path + 1;
                     updateCopy();
