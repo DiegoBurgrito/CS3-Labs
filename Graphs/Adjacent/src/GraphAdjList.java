@@ -38,7 +38,6 @@ public class GraphAdjList extends Graph {
 	 */
 	public void implementAddEdge(int v, int w) {
 		(adjListsMap.get(v)).add(w);
-
 	}
 
 	/**
@@ -89,14 +88,17 @@ public class GraphAdjList extends Graph {
 	 */
 	 public List<Integer> getDistance2(int v) {
 		// Implement this method
-
-
-
-
-
-
-
-		return null;
+		List<Integer> distance2 = new ArrayList<Integer>();
+		List<Integer> neighbors = getNeighbors(v);
+		for (int w : neighbors) {
+			List<Integer> neighbors2 = getNeighbors(w);
+			for (int x : neighbors2) {
+				if (!distance2.contains(x)) {
+					distance2.add(x);
+				}
+			}
+		}
+		return distance2;
 	}
 
 	/**
