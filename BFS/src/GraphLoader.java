@@ -77,27 +77,6 @@ public class GraphLoader
 	}
 
 
-	/**
-	 *
-	 *  Read in a file specifying a map.
-	 *
-	 * The file contains data lines as follows:
-	 * lat1 lon1 lat2 lon2 roadName roadType
-	 *
-	 * where each line is a segment of a road
-	 * These road segments are assumed to be ONE WAY.
-	 *
-	 * This method will collapse the points so that only intersections
-	 * are represented as nodes in the graph.
-	 *
-	 * @param filename The file containing the road data, in the format
-	 *   described.
-	 * @param map The graph to load the map into.  The graph is
-	 *   assumed to be directed.
-	 * @param segments The collection of RoadSegments that define the
-	 *   shape of a road.  These segments are maintained separately from
-	 *   the graph as they are only used to display paths.
-	 */
 	public static void loadRoadMap(String filename, MapGraph map)
 	{
 		loadRoadMap(filename, map, null, null);
