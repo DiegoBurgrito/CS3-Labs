@@ -1,9 +1,29 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Reachability {
     static int reach(ArrayList<Integer>[] adj, int x, int y) {
         //write your code here
+        Stack<Integer> stack = new Stack<>();
+        Set<Integer> visited= new HashSet<>();
+        stack.push(x);
+        while (!stack.isEmpty()) {
+            int curr = stack.pop();
+            if (adj[curr].contains(y)) return 1;
+            visited.add(curr);
+            for (int num: adj[curr]) {
+                if(!visited.contains(num)) {
+                    visited.add(num);
+                    stack.push(num);
+                }
+
+            }
+        }
+        if(adj[x].contains(y) || adj[y].contains(x)) {
+            return 1;
+        }
+
+
+
         return 0;
     }
 
